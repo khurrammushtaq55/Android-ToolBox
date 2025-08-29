@@ -37,12 +37,15 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mmushtaq.orm.allinone.R
+import com.mmushtaq.orm.allinone.ads.BannerAd
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin
@@ -83,7 +86,11 @@ fun CompassScreen(vm: CompassViewModel = viewModel()) {
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(title = { Text("Compass") })
-    }) { pad ->
+    },
+        bottomBar = {
+            BannerAd(
+            )
+        }) { pad ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
