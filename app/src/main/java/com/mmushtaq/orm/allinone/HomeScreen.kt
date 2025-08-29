@@ -36,6 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mmushtaq.orm.allinone.ads.BannerAd
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,6 +57,9 @@ fun HomeScreen(onOpen: (String) -> Unit) {
             CenterAlignedTopAppBar(
                 title = { Text("All-in-One Toolbox", fontWeight = FontWeight.SemiBold) }
             )
+        },
+        bottomBar = {
+            BannerAd()
         }
     ) { pad ->
         Column(

@@ -79,4 +79,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
+    //Ads
+    // Google Mobile Ads SDK (AdMob)
+    implementation(libs.play.services.ads)
+    // UMP (User Messaging Platform) for GDPR/EEA consent
+    implementation(libs.user.messaging.platform)
+
+
 }
