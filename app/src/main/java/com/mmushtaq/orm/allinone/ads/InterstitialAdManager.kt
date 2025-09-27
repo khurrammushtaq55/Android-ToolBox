@@ -1,20 +1,21 @@
 package com.mmushtaq.orm.allinone.ads
 
 import android.app.Activity
-import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+
 class InterstitialAdManager(
     private val activity: Activity,
-    private var adUnitId: String,
-    private val isTestDevice: Boolean = true
+    private var adUnitId: String = activity.getString(com.mmushtaq.orm.allinone.R.string.admob_interstitial_id),
 ) {
     private var interstitial: InterstitialAd? = null
 
     fun load(onLoaded: (() -> Unit)? = null, onFailed: (() -> Unit)? = null) {
-        if(isTestDevice) adUnitId = activity.getString(com.mmushtaq.orm.allinone.R.string.admob_test_interstitial)
+        if(AdsSetting.USE_TEST_ADS) adUnitId = activity.getString(com.mmushtaq.orm.allinone.R.string.admob_test_interstitial)
 
         InterstitialAd.load(
             activity,

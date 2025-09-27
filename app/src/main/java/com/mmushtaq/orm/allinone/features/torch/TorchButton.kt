@@ -28,11 +28,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mmushtaq.orm.allinone.R
 
 @Composable
 fun TorchBigButton(
@@ -43,7 +45,7 @@ fun TorchBigButton(
     val scale by animateFloatAsState(
         targetValue = if (isOn) 1.06f else 1f,
         animationSpec = spring(dampingRatio = 0.7f, stiffness = 150f),
-        label = "torch-scale"
+        label = stringResource(R.string.torch_scale)
     )
 
     val primaryColor = MaterialTheme.colorScheme.primary

@@ -145,9 +145,8 @@ private fun NavGraphBuilder.addConverter(navController: NavHostController) {
 @Composable
 fun ShowAd(navController: NavHostController) {
     val activity = LocalActivity.current as Activity
-    val adUnitId = stringResource(R.string.admob_interstitial_id)
 
-    val interstitial = remember { InterstitialAdManager(activity, adUnitId) }
+    val interstitial = remember { InterstitialAdManager(activity) }
     LaunchedEffect(Unit) { interstitial.load() }
 
     BackHandler {
