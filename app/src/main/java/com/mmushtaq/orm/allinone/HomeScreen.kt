@@ -17,6 +17,7 @@ import androidx.compose.material.icons.rounded.Straighten
 import androidx.compose.material.icons.rounded.SwapHoriz
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -31,31 +32,85 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mmushtaq.orm.allinone.ads.BannerAd
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(onOpen: (String) -> Unit) {
+    val flashlightTitle = stringResource(R.string.flashlight)
+    val instant_torch_control = stringResource(R.string.instant_torch_control)
+    val compassTitle = stringResource(R.string.compass)
+    val magnetic_true_north = stringResource(R.string.magnetic_true_north)
+    val bubbleTitle = stringResource(R.string.bubble_level)
+    val _2_axis_inclinometer = stringResource(R.string._2_axis_inclinometer)
+    val rulerTitle = stringResource(R.string.ruler)
+    val screen_ruler_calibrate = stringResource(R.string.screen_ruler_calibrate)
+    val sound_meterTitle = stringResource(R.string.sound_meter)
+    val relative_db_meter = stringResource(R.string.relative_db_meter)
+    val converterTitle = stringResource(R.string.converter)
+    val quick_unit_converter = stringResource(R.string.quick_unit_converter)
+
+
     val tools = remember {
         listOf(
-            Tool("Flashlight",  "Instant torch control",   route = "torch",     icon = Icons.Rounded.FlashlightOn),
-            Tool("Compass",     "Magnetic / True North",   route = "compass",   icon = Icons.Rounded.Explore),
-            Tool("Bubble Level","2-axis inclinometer",     route = "level",     icon = Icons.Rounded.BubbleChart),
-            Tool("Ruler",       "Screen ruler + calibrate",route = "ruler",     icon = Icons.Rounded.Straighten),
-            Tool("Sound Meter", "Relative dB meter",       route = "sound",     icon = Icons.Rounded.GraphicEq),
-            Tool("Converter",   "Quick unit converter",    route = "converter", icon = Icons.Rounded.SwapHoriz),
+            Tool(
+                flashlightTitle,
+                instant_torch_control,
+                route = "torch",
+                icon = Icons.Rounded.FlashlightOn
+            ),
+            Tool(
+                compassTitle,
+                magnetic_true_north,
+                route = "compass",
+                icon = Icons.Rounded.Explore
+            ),
+            Tool(
+                bubbleTitle,
+                _2_axis_inclinometer,
+                route = "level",
+                icon = Icons.Rounded.BubbleChart
+            ),
+            Tool(
+                rulerTitle,
+                screen_ruler_calibrate,
+                route = "ruler",
+                icon = Icons.Rounded.Straighten
+            ),
+            Tool(
+                sound_meterTitle,
+                relative_db_meter,
+                route = "sound",
+                icon = Icons.Rounded.GraphicEq
+            ),
+            Tool(
+                converterTitle,
+                quick_unit_converter,
+                route = "converter",
+                icon = Icons.Rounded.SwapHoriz
+            ),
         )
     }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("All-in-One Toolbox", fontWeight = FontWeight.SemiBold) }
+                title = {
+                    Text(
+                        stringResource(R.string.app_name),
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
             )
+        },
+        bottomBar = {
+            BannerAd()
         }
     ) { pad ->
         Column(
@@ -107,13 +162,13 @@ private fun HeroHeader(modifier: Modifier = Modifier) {
         ) {
             Column(Modifier.align(Alignment.CenterStart)) {
                 Text(
-                    text = "Handy tools, zero clutter",
+                    text = stringResource(R.string.handy_tools_zero_clutter),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    text = "Flashlight • Compass • Level • Ruler • Sound • Converter",
+                    text = stringResource(R.string.flashlight_compass_level_ruler_sound_converter),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.88f)
                 )
@@ -134,12 +189,14 @@ private fun ToolCard(tool: Tool, index: Int, onClick: () -> Unit) {
                 MaterialTheme.colorScheme.primaryContainer
             )
         )
+
         1 -> Brush.linearGradient(
             listOf(
                 MaterialTheme.colorScheme.secondary.copy(alpha = 0.40f),
                 MaterialTheme.colorScheme.secondaryContainer
             )
         )
+
         else -> Brush.linearGradient(
             listOf(
                 MaterialTheme.colorScheme.tertiary.copy(alpha = 0.40f),
@@ -169,7 +226,7 @@ private fun ToolCard(tool: Tool, index: Int, onClick: () -> Unit) {
             // Icon bubble
             Surface(shape = CircleShape) {
                 Box(Modifier.size(48.dp), contentAlignment = Alignment.Center) {
-                    androidx.compose.material3.Icon(
+                    Icon(
                         imageVector = tool.icon,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurface,
@@ -182,7 +239,11 @@ private fun ToolCard(tool: Tool, index: Int, onClick: () -> Unit) {
             Column(
                 modifier = Modifier.align(Alignment.BottomStart)
             ) {
-                Text(tool.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(
+                    tool.title,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
                 Text(
                     tool.subtitle,
                     style = MaterialTheme.typography.bodySmall,
@@ -206,5 +267,5 @@ private data class Tool(
 @Preview
 @Composable
 private fun ToolCardPreview() {
-   HomeScreen {  }
+    HomeScreen { }
 }

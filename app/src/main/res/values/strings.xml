@@ -1,3 +1,44 @@
 <resources>
-    <string name="app_name">All‑in‑One Toolbox</string>
+    <string name="app_name">Toolify – Smart Utilities</string>
+
+
+    <!-- TODO: replace these with your real AdMob IDs in release -->
+    <string name="admob_app_id">ca-app-pub-5966317256433132~5431696514</string>
+    <string name="admob_banner_id">ca-app-pub-5966317256433132/7566905263</string>
+    <string name="admob_interstitial_id">ca-app-pub-5966317256433132/5949768937</string>
+    <string name="admob_rewarded_id">ca-app-pub-xxxxxxxxxxxxxxxx/cccccccccc</string>
+
+    <!-- Google test unit IDs (safe to commit; use only in debug/dev) -->
+    <string name="admob_test_banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_test_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_test_rewarded">ca-app-pub-3940256099942544/5224354917</string>
+
+
+
+
+
+    <string name="flashlight">Flashlight</string>
+    <string name="compass">Compass</string>
+    <string name="bubble_level">Bubble Level</string>
+    <string name="ruler">Ruler</string>
+    <string name="sound_meter">Sound Meter</string>
+    <string name="converter">Converter</string>
+    <string name="instant_torch_control">Instant torch control</string>
+    <string name="magnetic_true_north">Magnetic / True North</string>
+    <string name="_2_axis_inclinometer">2-axis inclinometer</string>
+    <string name="screen_ruler_calibrate">Screen ruler + calibrate</string>
+    <string name="relative_db_meter">Relative dB meter</string>
+    <string name="quick_unit_converter">Quick unit converter</string>
+    <string name="handy_tools_zero_clutter">Handy tools, zero clutter</string>
+    <string name="flashlight_compass_level_ruler_sound_converter">Flashlight • Compass • Level • Ruler • Sound • Converter</string>
+    <string name="no_camera_flash_available_on_this_device">No camera flash available on this device.</string>
+    <string name="grant_camera_permission_to_control_the_flashlight">Grant camera permission to control the flashlight.</string>
+    <string name="torch_is_on">Torch is ON</string>
+    <string name="torch_is_off">Torch is OFF</string>
+    <string name="keep_device_cool_prolonged_use_may_warm_the_camera">Keep device cool — prolonged use may warm the camera.</string>
+    <string name="stop_sos">Stop SOS</string>
+    <string name="sos">SOS</string>
+    <string name="turn_off">Turn Off</string>
+    <string name="torch_scale">torch-scale</string>
+
 </resources>
