@@ -25,11 +25,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mmushtaq.orm.allinone.R
+import com.mmushtaq.orm.allinone.ads.BannerAd
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,7 +51,12 @@ fun LevelScreen(vm: LevelViewModel = viewModel()) {
 // Animate bubble position based on degrees → pixels mapping (done inside canvas)
     val pitch by remember { derivedStateOf { vm.pitchDeg } }
     val roll by remember { derivedStateOf { vm.rollDeg } }
-    Scaffold(topBar = { CenterAlignedTopAppBar(title = { Text("Bubble Level") }) }) { pad ->
+    Scaffold(
+        topBar = { CenterAlignedTopAppBar(title = { Text("Bubble Level") }) },
+        bottomBar = {
+            BannerAd(
+            )
+        }) { pad ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

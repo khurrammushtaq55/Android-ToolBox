@@ -10,7 +10,9 @@ activityCompose = "1.10.1"
 composeBom = "2025.08.00"
 camerax = "1.4.2"
 coil = "2.6.0"
+playServicesAds = "24.5.0"
 splash = "1.0.1"
+userMessagingPlatform = "3.2.0"
 
 
 
@@ -46,6 +48,8 @@ camerax-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref =
 camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "userMessagingPlatform" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 
 
 

@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +36,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mmushtaq.orm.allinone.R
+import com.mmushtaq.orm.allinone.ads.BannerAd
 import com.mmushtaq.orm.allinone.core.widgets.hasCameraPermission
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +71,12 @@ fun TorchScreen(vm: TorchViewModel = viewModel()) {
             vm.setTorch(false)
         }
     }
-    Scaffold(topBar = { CenterAlignedTopAppBar(title = { Text("Flashlight") }) }) { pad ->
+    Scaffold(
+        topBar = { CenterAlignedTopAppBar(title = { Text(stringResource(R.string.flashlight)) }) },
+        bottomBar = {
+            BannerAd(
+            )
+        }) { pad ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -102,25 +110,25 @@ fun TorchScreen(vm: TorchViewModel = viewModel()) {
                 when {
                     !vm.hasFlash -> {
                         Text(
-                            "No camera flash available on this device.",
+                            stringResource(R.string.no_camera_flash_available_on_this_device),
                             color = MaterialTheme.colorScheme.error
                         )
                     }
 
                     !hasCameraPerm -> {
                         PermissionCard(
-                            text = "Grant camera permission to control the flashlight.",
+                            text = stringResource(R.string.grant_camera_permission_to_control_the_flashlight),
                             onGrant = { reqPerm.launch(android.Manifest.permission.CAMERA) }
                         )
                     }
 
                     else -> {
                         Text(
-                            if (vm.isOn) "Torch is ON" else "Torch is OFF",
+                            if (vm.isOn) stringResource(R.string.torch_is_on) else stringResource(R.string.torch_is_off),
                             style = MaterialTheme.typography.titleMedium
                         )
                         Text(
-                            "Keep device cool — prolonged use may warm the camera.",
+                            stringResource(R.string.keep_device_cool_prolonged_use_may_warm_the_camera),
                             fontSize = 12.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -144,7 +152,7 @@ fun TorchScreen(vm: TorchViewModel = viewModel()) {
                         }
                     },
                     enabled = vm.hasFlash
-                ) { Text(if (vm.isSos) "Stop SOS" else "SOS") }
+                ) { Text(if (vm.isSos) stringResource(R.string.stop_sos) else stringResource(R.string.sos)) }
 
                 OutlinedButton(
                     onClick = {
@@ -153,7 +161,7 @@ fun TorchScreen(vm: TorchViewModel = viewModel()) {
                         }
                     },
                     enabled = vm.hasFlash
-                ) { Text("Turn Off") }
+                ) { Text(stringResource(R.string.turn_off)) }
             }
         }
     }
