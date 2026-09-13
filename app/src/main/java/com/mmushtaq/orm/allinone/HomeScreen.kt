@@ -2,7 +2,18 @@ package com.mmushtaq.orm.allinone
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
@@ -10,11 +21,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BubbleChart
+import androidx.compose.material.icons.rounded.Calculate
 import androidx.compose.material.icons.rounded.Explore
 import androidx.compose.material.icons.rounded.FlashlightOn
 import androidx.compose.material.icons.rounded.GraphicEq
+import androidx.compose.material.icons.rounded.Percent
 import androidx.compose.material.icons.rounded.Straighten
 import androidx.compose.material.icons.rounded.SwapHoriz
+import androidx.compose.material.icons.rounded.Timer
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,7 +40,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -37,65 +50,74 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.mmushtaq.orm.allinone.ads.BannerAd
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(onOpen: (String) -> Unit) {
     val flashlightTitle = stringResource(R.string.flashlight)
-    val instant_torch_control = stringResource(R.string.instant_torch_control)
+    val instantTorchControl = stringResource(R.string.instant_torch_control)
     val compassTitle = stringResource(R.string.compass)
-    val magnetic_true_north = stringResource(R.string.magnetic_true_north)
+    val magneticTrueNorth = stringResource(R.string.magnetic_true_north)
     val bubbleTitle = stringResource(R.string.bubble_level)
-    val _2_axis_inclinometer = stringResource(R.string._2_axis_inclinometer)
+    val inclinometer = stringResource(R.string._2_axis_inclinometer)
     val rulerTitle = stringResource(R.string.ruler)
-    val screen_ruler_calibrate = stringResource(R.string.screen_ruler_calibrate)
-    val sound_meterTitle = stringResource(R.string.sound_meter)
-    val relative_db_meter = stringResource(R.string.relative_db_meter)
+    val screenRulerCalibrate = stringResource(R.string.screen_ruler_calibrate)
+    val soundMetertitle = stringResource(R.string.sound_meter)
+    val relativeDbMeter = stringResource(R.string.relative_db_meter)
     val converterTitle = stringResource(R.string.converter)
-    val quick_unit_converter = stringResource(R.string.quick_unit_converter)
+    val quickUnitConverter = stringResource(R.string.quick_unit_converter)
+    val stopwatchTitle = stringResource(R.string.stopwatchTitle)
+    val stopwatchDesc = stringResource(R.string.stopwatchDesc)
+    val calcTitle = stringResource(R.string.calcTitle)
+    val calcDesc = stringResource(R.string.calcDesc)
+    val quickCalc = stringResource(R.string.quickCalc)
+    val quickCalcDesc = stringResource(R.string.quickCalcDesc)
 
 
     val tools = remember {
         listOf(
             Tool(
                 flashlightTitle,
-                instant_torch_control,
+                instantTorchControl,
                 route = "torch",
                 icon = Icons.Rounded.FlashlightOn
             ),
             Tool(
                 compassTitle,
-                magnetic_true_north,
+                magneticTrueNorth,
                 route = "compass",
                 icon = Icons.Rounded.Explore
             ),
             Tool(
                 bubbleTitle,
-                _2_axis_inclinometer,
+                inclinometer,
                 route = "level",
                 icon = Icons.Rounded.BubbleChart
             ),
             Tool(
                 rulerTitle,
-                screen_ruler_calibrate,
+                screenRulerCalibrate,
                 route = "ruler",
                 icon = Icons.Rounded.Straighten
             ),
             Tool(
-                sound_meterTitle,
-                relative_db_meter,
+                soundMetertitle,
+                relativeDbMeter,
                 route = "sound",
                 icon = Icons.Rounded.GraphicEq
             ),
             Tool(
                 converterTitle,
-                quick_unit_converter,
+                quickUnitConverter,
                 route = "converter",
                 icon = Icons.Rounded.SwapHoriz
             ),
-        )
+            Tool(stopwatchTitle, stopwatchDesc, route = "stopwatch", icon = Icons.Rounded.Timer),
+            Tool(calcTitle, calcDesc, route = "calculator", icon = Icons.Rounded.Calculate),
+            Tool(quickCalc, quickCalcDesc, route = "quickcalc", icon = Icons.Rounded.Percent),
+
+            )
     }
 
     Scaffold(

@@ -2,7 +2,6 @@
     <string name="app_name">Toolify – Smart Utilities</string>
 
 
-    <!-- TODO: replace these with your real AdMob IDs in release -->
     <string name="admob_app_id">ca-app-pub-5966317256433132~5431696514</string>
     <string name="admob_banner_id">cca-app-pub-5966317256433132/3873101980</string>
     <string name="admob_interstitial_id">ca-app-pub-5966317256433132/5949768937</string>
@@ -40,5 +39,11 @@
     <string name="sos">SOS</string>
     <string name="turn_off">Turn Off</string>
     <string name="torch_scale">torch-scale</string>
+    <string name="stopwatchTitle">Stopwatch</string>
+    <string name="stopwatchDesc">Timer and lap tracking</string>
+    <string name="calcTitle">Calculator</string>
+    <string name="calcDesc">Basic and scientific</string>
+    <string name="quickCalc">Quick Calc</string>
+    <string name="quickCalcDesc">Tip, BMI, age, %</string>
 
 </resources>

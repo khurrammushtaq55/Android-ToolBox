@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -23,11 +22,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mmushtaq.orm.allinone.ads.AdsInitializer
 import com.mmushtaq.orm.allinone.ads.InterstitialAdManager
+import com.mmushtaq.orm.allinone.features.calculator.CalculatorScreen
 import com.mmushtaq.orm.allinone.features.compass.CompassScreen
 import com.mmushtaq.orm.allinone.features.converter.ConverterScreen
 import com.mmushtaq.orm.allinone.features.level.LevelScreen
+import com.mmushtaq.orm.allinone.features.quickcalc.QuickCalcScreen
 import com.mmushtaq.orm.allinone.features.ruler.RulerScreen
 import com.mmushtaq.orm.allinone.features.sound.SoundScreen
+import com.mmushtaq.orm.allinone.features.stopwatch.StopwatchTimerScreen
 import com.mmushtaq.orm.allinone.features.torch.TorchScreen
 
 // --- Routes for navigation ---
@@ -39,6 +41,9 @@ object Routes {
     const val RULER = "ruler"
     const val SOUND = "sound"
     const val CONVERTER = "converter"
+    const val STOPWATCH = "stopwatch"
+    const val CALCULATOR = "calculator"
+    const val QUICKCALC = "quickcalc"
 }
 
 class MainActivity : ComponentActivity() {
@@ -87,6 +92,9 @@ private fun AppNavHost(
         addRuler(navController)
         addSound(navController)
         addConverter(navController)
+        addCalculator()
+        addQuickCalc()
+        addStopwatch()
     }
 }
 
@@ -139,6 +147,18 @@ private fun NavGraphBuilder.addConverter(navController: NavHostController) {
     composable(Routes.CONVERTER) {
         ConverterScreen()
     }
+}
+
+private fun NavGraphBuilder.addStopwatch() {
+    composable(Routes.STOPWATCH) { StopwatchTimerScreen() }
+}
+
+private fun NavGraphBuilder.addCalculator() {
+    composable(Routes.CALCULATOR) { CalculatorScreen() }
+}
+
+private fun NavGraphBuilder.addQuickCalc() {
+    composable(Routes.QUICKCALC) { QuickCalcScreen() }
 }
 
 
