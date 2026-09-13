@@ -1,38 +1,26 @@
 package com.mmushtaq.orm.allinone
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
-import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.core.view.WindowCompat
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mmushtaq.orm.allinone.ads.AdsInitializer
-import com.mmushtaq.orm.allinone.ads.InterstitialAdManager
-import com.mmushtaq.orm.allinone.features.calculator.CalculatorScreen
 import com.mmushtaq.orm.allinone.features.compass.CompassScreen
 import com.mmushtaq.orm.allinone.features.converter.ConverterScreen
 import com.mmushtaq.orm.allinone.features.level.LevelScreen
-import com.mmushtaq.orm.allinone.features.quickcalc.QuickCalcScreen
 import com.mmushtaq.orm.allinone.features.ruler.RulerScreen
 import com.mmushtaq.orm.allinone.features.sound.SoundScreen
-import com.mmushtaq.orm.allinone.features.stopwatch.StopwatchTimerScreen
 import com.mmushtaq.orm.allinone.features.torch.TorchScreen
 
-// --- Routes for navigation ---
 object Routes {
     const val HOME = "home"
     const val TORCH = "torch"
@@ -41,25 +29,20 @@ object Routes {
     const val RULER = "ruler"
     const val SOUND = "sound"
     const val CONVERTER = "converter"
-    const val STOPWATCH = "stopwatch"
-    const val CALCULATOR = "calculator"
-    const val QUICKCALC = "quickcalc"
 }
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Draw behind system bars (status/navigation) for modern look
+        // enableEdgeToEdge() alone handles decorFitsSystemWindows(false) AND
+        // sets correct system bar contrast enforcement for the current theme.
+        // Do NOT also call WindowCompat.setDecorFitsSystemWindows manually —
+        // the duplicate call is what triggers the "may not display for all
+        // users" warning on API 35+.
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        // Let window insets flow to Compose
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        AdsInitializer.init(this /*, testDeviceIds = listOf("85A8F6E80A77E80AEC833CA3993A7071") */)
-
-
         setContent {
-
             App()
         }
     }
@@ -67,10 +50,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    // If you have your own theme, replace with ToolboxTheme {}
     MaterialTheme {
         Surface(
-            modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
         ) {
             val navController = rememberNavController()
             AppNavHost(navController = navController)
@@ -80,103 +63,49 @@ fun App() {
 
 @Composable
 private fun AppNavHost(
-    navController: NavHostController, startDestination: String = Routes.HOME
+    navController: NavHostController,
+    startDestination: String = Routes.HOME
 ) {
     NavHost(
-        navController = navController, startDestination = startDestination
+        navController = navController,
+        startDestination = startDestination
     ) {
         addHome(navController)
-        addTorch(navController)
-        addCompass(navController)
-        addLevel(navController)
-        addRuler(navController)
-        addSound(navController)
-        addConverter(navController)
-        addCalculator()
-        addQuickCalc()
-        addStopwatch()
+        addTorch()
+        addCompass()
+        addLevel()
+        addRuler()
+        addSound()
+        addConverter()
     }
 }
-
-// --- Nav graph split into small helpers for readability ---
 
 private fun NavGraphBuilder.addHome(navController: NavHostController) {
     composable(Routes.HOME) {
-        HomeScreen(onOpen = { route ->
-            navController.navigate(route)
-        })
-
+        HomeScreen(onOpen = { route -> navController.navigate(route) })
     }
 }
 
-private fun NavGraphBuilder.addTorch(navController: NavHostController) {
-    composable(Routes.TORCH) {
-        TorchScreen()
-    }
+private fun NavGraphBuilder.addTorch() {
+    composable(Routes.TORCH) { TorchScreen() }
 }
 
-private fun NavGraphBuilder.addCompass(navController: NavHostController) {
-    composable(Routes.COMPASS) {
-        CompassScreen()
-    }
+private fun NavGraphBuilder.addCompass() {
+    composable(Routes.COMPASS) { CompassScreen() }
 }
 
-private fun NavGraphBuilder.addLevel(navController: NavHostController) {
-    composable(Routes.LEVEL) {
-        LevelScreen()
-    }
+private fun NavGraphBuilder.addLevel() {
+    composable(Routes.LEVEL) { LevelScreen() }
 }
 
-private fun NavGraphBuilder.addRuler(navController: NavHostController) {
-    composable(Routes.RULER) {
-
-        ShowAd(navController)
-
-        RulerScreen()
-    }
+private fun NavGraphBuilder.addRuler() {
+    composable(Routes.RULER) { RulerScreen() }
 }
 
-private fun NavGraphBuilder.addSound(navController: NavHostController) {
-    composable(Routes.SOUND) {
-        ShowAd(navController)
-        SoundScreen()
-    }
+private fun NavGraphBuilder.addSound() {
+    composable(Routes.SOUND) { SoundScreen() }
 }
 
-private fun NavGraphBuilder.addConverter(navController: NavHostController) {
-    composable(Routes.CONVERTER) {
-        ConverterScreen()
-    }
-}
-
-private fun NavGraphBuilder.addStopwatch() {
-    composable(Routes.STOPWATCH) { StopwatchTimerScreen() }
-}
-
-private fun NavGraphBuilder.addCalculator() {
-    composable(Routes.CALCULATOR) { CalculatorScreen() }
-}
-
-private fun NavGraphBuilder.addQuickCalc() {
-    composable(Routes.QUICKCALC) { QuickCalcScreen() }
-}
-
-
-@Composable
-fun ShowAd(navController: NavHostController) {
-    val activity = LocalActivity.current as Activity
-
-    val interstitial = remember { InterstitialAdManager(activity) }
-    LaunchedEffect(Unit) { interstitial.load() }
-
-    BackHandler {
-        if (interstitial.isReady) {
-            interstitial.show {
-                interstitial.load()             // preload next
-                navController.popBackStack()    // navigate after ad closes
-            }
-        } else {
-            navController.popBackStack()
-        }
-    }
+private fun NavGraphBuilder.addConverter() {
+    composable(Routes.CONVERTER) { ConverterScreen() }
 }
