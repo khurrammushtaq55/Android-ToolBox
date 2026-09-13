@@ -4,7 +4,7 @@
 
     <!-- TODO: replace these with your real AdMob IDs in release -->
     <string name="admob_app_id">ca-app-pub-5966317256433132~5431696514</string>
-    <string name="admob_banner_id">ca-app-pub-5966317256433132/7566905263</string>
+    <string name="admob_banner_id">cca-app-pub-5966317256433132/3873101980</string>
     <string name="admob_interstitial_id">ca-app-pub-5966317256433132/5949768937</string>
     <string name="admob_rewarded_id">ca-app-pub-xxxxxxxxxxxxxxxx/cccccccccc</string>
 
